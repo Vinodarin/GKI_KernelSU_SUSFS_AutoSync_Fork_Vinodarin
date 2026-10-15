@@ -1,0 +1,19 @@
+name: Auto Sync Original GKI_KernelSU_SUSFS
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Проверка и обновление каждые 6 часов
+  workflow_dispatch: # Позволяет запустить синхронизацию вручную кнопкой
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync with original repo
+        uses: tgymnich/fork-sync-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          head: main
+          owner: WildKernels
+          repository: GKI_KernelSU_SUSFS
